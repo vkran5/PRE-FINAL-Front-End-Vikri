@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { API_URL } from '../helper';
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import Moment from 'react-moment';
 import {
     WrapItem,
     Menu,
@@ -71,7 +72,7 @@ const DetailPage = (props) => {
                                     <img className='profile-img mt-2' src={API_URL + val.profile_img} alt="" />
                                     <div>
                                         <h1 className='username fw-bold'>{val.username}</h1>
-                                        <p className="p-2 text-muted ms-1 mt-1" style={{ fontSize: '12px' }}>{val.date.split('T')[0]}</p>
+                                        <p className="p-2 text-muted ms-1 mt-1" style={{ fontSize: '12px' }}><Moment fromNow>{val.date}</Moment></p>
                                     </div>
                                 </div>
 
@@ -265,7 +266,7 @@ const DetailPage = (props) => {
                 <div id='comment'>
                     <div>
                         <p className='fw-bold'>{val.username} <span className='fw-light'>{val.comment}</span></p>
-                        <p className='text-muted' style={{ fontSize: '12px' }}>{val.date.split('T')[0]}</p>
+                        <p className='text-muted' style={{ fontSize: '12px' }}><Moment fromNow>{val.date}</Moment></p>
                     </div>
                 </div>
             )

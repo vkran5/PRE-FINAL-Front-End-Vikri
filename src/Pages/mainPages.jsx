@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaRegHeart, FaRegPlusSquare, FaHome } from "react-icons/fa";
 import { RiUserSettingsLine, RiUser3Line, RiHome2Line } from "react-icons/ri";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import Moment from 'react-moment';
 import {
     Button,
     Modal,
@@ -203,7 +204,7 @@ const MainPage = () => {
 
                                     <div id='actions' className="d-flex justify-content-between">
                                         <p className='p-2 fw-bold text-muted'>{val.likes} Likes</p>
-                                        <p className="p-2 text-muted">{val.date.split('T')[0]}</p>
+                                        <p className="p-2 text-muted"> <Moment fromNow>{val.date}</Moment> </p>
                                     </div>
 
                                     <div id='captions' className='px-2 '>
