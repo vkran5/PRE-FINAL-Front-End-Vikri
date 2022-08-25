@@ -41,6 +41,7 @@ const MainPage = () => {
     const [toggleDelete, setToggleDelete] = React.useState(false);
     const [uploading, setUploading] = React.useState('');
     const [loadMore, setLoadMore] = React.useState(<Spinner size='sm' color='purple.500' />);
+    const [selectedData, setSelectedData] = React.useState(null);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -111,8 +112,19 @@ const MainPage = () => {
                                                                 </MenuButton>
 
                                                                 <MenuList >
-                                                                    <MenuItem className='text-muted' onClick={() => setToggleCap(!toggleCap)}>Edit Caption</MenuItem>
-                                                                    <MenuItem className='text-danger' onClick={() => setToggleDelete(!toggleDelete)}>Delete</MenuItem>
+                                                                    <MenuItem className='text-muted' onClick={() => {
+                                                                        setSelectedData(val);
+                                                                        setToggleCap(!toggleCap)
+                                                                    }}>
+                                                                        Edit Caption
+                                                                    </MenuItem>
+                                                                    
+                                                                    <MenuItem className='text-danger' onClick={() => {
+                                                                        setSelectedData(val);
+                                                                        setToggleDelete(!toggleDelete);
+                                                                    }}>
+                                                                        Delete
+                                                                    </MenuItem>
                                                                 </MenuList>
                                                             </Menu>
                                                         </WrapItem>
@@ -124,7 +136,7 @@ const MainPage = () => {
                                                                     <ModalFooter>
                                                                         <ButtonGroup>
                                                                         <Button type='button' 
-                                                                                onClick={() => onDeletePost(val.idposts)}
+                                                                                onClick={() => onDeletePost(selectedData.idposts)}
                                                                                 colorScheme='red'
                                                                             >
                                                                                 Yes
@@ -159,7 +171,7 @@ const MainPage = () => {
                                                                     </ModalBody>
 
                                                                     <ModalFooter>
-                                                                        <Button className='text-white btn btn-violet' mr={3} onClick={() => onUpdateCaption(val.idposts)}>
+                                                                        <Button className='text-white btn btn-violet' mr={3} onClick={() => onUpdateCaption(selectedData.idposts)}>
                                                                             Update Caption
                                                                         </Button>
                                                                     </ModalFooter>
@@ -244,6 +256,7 @@ const MainPage = () => {
                 setLoadMore(<Spinner size='sm' color='purple.500' />);
                 setOffset(1)
                 setToggleDelete(!toggleDelete)
+                setSelectedData(null);
                 toast({
                     title: `Content has been deleted`,
                     status: 'success',
@@ -265,6 +278,7 @@ const MainPage = () => {
                     setToggleCap(!toggleCap)
                     getPost();
                     setOffset(1);
+                    setSelectedData(null);
                 }
             }).catch(err => {
                 console.log(err);
